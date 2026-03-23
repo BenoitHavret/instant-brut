@@ -1,14 +1,21 @@
-<nav class="navbar">
-  <div class="logo" routerLink="/">INSTANT<span>BRUT</span></div>
-  <div class="links">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Galerie</a>
+<header class="main-header">
+  <div class="logo-container" routerLink="/">
+    <h1>INSTANT<span>BRUT</span></h1>
+  </div>
+
+  <nav class="theme-nav">
+    <a routerLink="/galerie/tous" routerLinkActive="active">Tous</a>
+    <a routerLink="/galerie/faune" routerLinkActive="active">Faune</a>
+    <a routerLink="/galerie/traditions" routerLinkActive="active">Traditions</a>
+    <a routerLink="/galerie/paysages" routerLinkActive="active">Paysages</a>
+    <span class="separator">|</span>
     <a routerLink="/boutique" routerLinkActive="active">Boutique</a>
     <a routerLink="/contact" routerLinkActive="active">Contact</a>
-  </div>
-</nav>
+  </nav>
+</header>
 
 <main>
-  <router-outlet></router-outlet>
+  <router-outlet #outlet="outlet"></router-outlet>
 </main>
 
 <footer>

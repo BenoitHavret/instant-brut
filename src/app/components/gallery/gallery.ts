@@ -1,6 +1,8 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, HostListener, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, HostListener, inject, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Photo } from '../../models/photo.model';
+import { GalleryService } from '../../services/gallery';
 
 @Component({
   selector: 'app-gallery',
@@ -10,18 +12,30 @@ import { Router } from '@angular/router';
   styleUrl: './gallery.scss',
 })
 export class Gallery {
+  private route = inject(ActivatedRoute);
+  private galleryService = inject(GalleryService);
   // On utilise un Signal pour une détection de changement ultra-rapide
-  photos = signal([
-    { id: 1, url: 'assets/img/cheval-blanc.jpg', title: 'Étalon en Camargue', category: 'Chevaux' },
-    { id: 2, url: 'assets/img/flamant-rose.jpg', title: 'Aube sur l\'étang', category: 'Oiseaux' },
-    { id: 3, url: 'assets/img/taureau-noir.jpg', title: 'Puissance brute', category: 'Taureaux' },
-    { id: 4, url: 'assets/img/abrivado.jpg', title: 'Course de rue', category: 'Tradition' }
-  ]);
+  photos = signal<Photo[]>([]);
+  currentTheme = signal<string>('');
 
   selectedIdx = signal<number | null>(null);
 
   // ... dans ton constructor ou inject :
-constructor(private router: Router) {}
+constructor(private router: Router) {
+  // Chaque fois que l'URL change (ex: /galerie/faune -> /galerie/paysages)
+    this.route.params.subscribe(params => {
+      const theme = params['theme'];
+      this.currentTheme.set(theme);
+      
+      if (theme === 'tous') {
+        // Logique pour tout afficher si tu veux une vue globale
+        this.photos.set(this.galleryService.getPhotosByCategory('')); // À adapter
+      } else {
+        this.photos.set(this.galleryService.getPhotosByCategory(theme));
+      }
+    });
+  }
+
 
   openLightbox(index: number) {
     this.selectedIdx.set(index);

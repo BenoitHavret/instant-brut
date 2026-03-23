@@ -1,12 +1,16 @@
 import { Routes } from '@angular/router';
 import { Contact } from './components/contact/contact';
-import { Gallery } from './components/gallery/gallery';
 import { Shop } from './components/shop/shop';
+import { Gallery } from './components/gallery/gallery';
 
 export const routes: Routes = [
   { 
     path: '', 
-    component: Gallery // Affiche la galerie dès l'arrivée sur le site
+    redirectTo: 'galerie/tous',
+    pathMatch: 'full'
+  },
+  {
+    path: 'galerie/:theme', component: Gallery
   },
   { path: 'contact', component: Contact },
   { path: 'boutique', component: Shop },
