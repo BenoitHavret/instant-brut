@@ -1,8 +1,5 @@
 [build]
   command = "npm run build"
-  publish = "dist/instant-brut/browser" # Vérifie bien le nom de ton projet ici
+  publish = "dist/instant-brut/browser" # REMPLACE 'instant-brut' par le nom exact dans ton dossier dist
 
-[[plugins]]
-  package = "@netlify/angular-runtime"
-  [plugins.inputs]
-    disable_runtime = true # On désactive la partie problématique
+# ON SUPPRIME TOUTE LA SECTION [[plugins]] QUI CONTIENT @netlify/angular-runtime
