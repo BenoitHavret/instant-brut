@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
-import { Gallery } from './components/gallery/gallery';
 import { Contact } from './components/contact/contact';
+import { Gallery } from './components/gallery/gallery';
+import { Shop } from './components/shop/shop';
 
 export const routes: Routes = [
   { 
@@ -8,15 +9,7 @@ export const routes: Routes = [
     component: Gallery // Affiche la galerie dès l'arrivée sur le site
   },
   { path: 'contact', component: Contact },
-//   { 
-//     path: 'boutique', 
-//     loadComponent: () => import('./pages/shop/shop.component').then(m => m.ShopComponent) 
-//     // Utilisation du "Lazy Loading" pour la performance (très Angular 21 !)
-//   },
-//   { 
-//     path: 'contact', 
-//     loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent) 
-//   },
+  { path: 'boutique', component: Shop },
   { 
     path: '**', 
     redirectTo: '' // Redirige les erreurs vers l'accueil

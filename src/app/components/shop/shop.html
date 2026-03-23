@@ -1,0 +1,24 @@
+<section class="shop-container">
+  <header class="shop-header">
+    <h2>La Boutique</h2>
+    <p>Offrez-vous un fragment de Camargue. Tous nos tirages sont numérotés et signés.</p>
+  </header>
+
+  <div class="product-grid">
+    @for (product of products(); track product.id) {
+      <div class="product-card">
+        <div class="product-image">
+          <img [src]="product.image" [alt]="product.title">
+        </div>
+        <div class="product-info">
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.description }}</p>
+          <span class="price">{{ product.price }}</span>
+          <button class="order-btn" [routerLink]="['/contact']" [queryParams]="{ sujet: product.id }">
+            Commander un tirage
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</section>

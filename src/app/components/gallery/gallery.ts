@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, HostListener, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './gallery.html',
   styleUrl: './gallery.scss',
 })
@@ -64,5 +64,26 @@ constructor(private router: Router) {}
   this.router.navigate(['/contact'], { 
     queryParams: { photo: photo.title } 
   });
+}
+// Ajoute cette méthode dans ta classe GalleryComponent
+sharePhoto(photo: any, event: Event) {
+  event.stopPropagation(); // Pour éviter de fermer la lightbox au clic
+
+  const shareData = {
+    title: `Instant Brut - ${photo.title}`,
+    text: `Découvrez cette photographie de Camargue : ${photo.title}`,
+    url: window.location.href // Partage l'URL actuelle avec le paramètre de la photo
+  };
+
+  // Si le navigateur supporte le partage natif (Mobile / Safari Mac)
+  if (navigator.share) {
+    navigator.share(shareData)
+      .then(() => console.log('Partage réussi'))
+      .catch((err) => console.log('Erreur de partage', err));
+  } else {
+    // Fallback : On copie le lien dans le presse-papier pour les vieux navigateurs
+    navigator.clipboard.writeText(window.location.href);
+    alert('Lien de la photo copié dans le presse-papier !');
+  }
 }
 }

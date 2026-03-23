@@ -1,9 +1,9 @@
 <nav class="navbar">
-  <div class="logo">INSTANT<span>BRUT</span></div>
+  <div class="logo" routerLink="/">INSTANT<span>BRUT</span></div>
   <div class="links">
-    <a routerLink="/">Galerie</a>
-    <a routerLink="/boutique">Tirages</a>
-    <a routerLink="/contact">Contact</a>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Galerie</a>
+    <a routerLink="/boutique" routerLinkActive="active">Boutique</a>
+    <a routerLink="/contact" routerLinkActive="active">Contact</a>
   </div>
 </nav>
 

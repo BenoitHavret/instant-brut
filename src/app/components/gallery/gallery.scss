@@ -1,18 +1,34 @@
 .gallery-grid {
   display: grid;
-  // 1 colonne sur mobile, 2 sur tablette, 3 sur Mac
-  grid-template-columns: repeat(1, 1fr);
-  
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
+  // Magie du CSS : crée autant de colonnes de 350px que possible
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 15px;
   padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr; // Une seule photo par ligne sur petit mobile
+    padding: 10px;
+    gap: 10px;
+  }
+}
+
+.photo-card {
+  position: relative;
+  overflow: hidden;
+  // On force un ratio élégant (3:2) pour que toutes les miniatures soient alignées
+  aspect-ratio: 3 / 2;
+  cursor: pointer;
+  background: #0a0a0a;
+
+  img {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  &:hover img {
+    transform: scale(1.08); // Léger zoom au survol sur Mac
+  }
 }
 
 img {
@@ -49,29 +65,31 @@ img {
   z-index: 2000;
   cursor: zoom-out;
 
+  
+
   .lightbox-content {
-    max-width: 90%;
-    max-height: 85%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: default;
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: 90vh;
+  max-width: 1200px;
+  position: relative; // Important pour les boutons nav-btn s'ils sont dedans
 
-    img {
-      max-width: 100%;
-      max-height: 80vh;
-      object-fit: contain;
-      box-shadow: 0 0 50px rgba(0,0,0,0.5);
-      border: 1px solid #333; // Cadre discret
-    }
-
-    .caption {
-      color: var(--accent-gold);
-      margin-top: 15px;
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-    }
+  .image-wrapper {
+    flex: 1; // Prend tout l'espace disponible au-dessus du footer
+    position: relative; // OBLIGATOIRE pour le "fill" de l'image
+    width: 100%;
   }
+
+  .lightbox-footer {
+    height: 80px; // Taille fixe pour tes boutons
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    z-index: 10; // Pour être sûr de passer devant l'image
+  }
+}
 
   .nav-btn {
     position: absolute;
@@ -113,6 +131,30 @@ img {
     .category { margin: 5px 0 0; color: #666; font-size: 0.8rem; text-transform: uppercase; }
   }
 
+  .actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  .share-btn {
+    background: transparent;
+    border: 1px solid #444;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    font-size: 1.2rem;
+
+    &:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+  }
   .buy-btn {
     background-color: var(--accent-gold);
     color: black;
@@ -133,6 +175,7 @@ img {
 
     .icon { margin-right: 10px; }
   }
+}  
 }
 
 // Mobile responsive
