@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 
 @Component({
   selector: 'app-gallery',
@@ -16,4 +16,39 @@ export class Gallery {
     { id: 3, url: 'assets/img/taureau-noir.jpg', title: 'Puissance brute', category: 'Taureaux' },
     { id: 4, url: 'assets/img/abrivado.jpg', title: 'Course de rue', category: 'Tradition' }
   ]);
+
+  selectedIdx = signal<number | null>(null);
+
+  openLightbox(index: number) {
+    this.selectedIdx.set(index);
+  }
+
+  closeLightbox() {
+    this.selectedIdx.set(null);
+  }
+
+  next(event: Event) {
+    event.stopPropagation();
+    const current = this.selectedIdx();
+    if (current !== null) {
+      this.selectedIdx.set((current + 1) % this.photos().length);
+    }
+  }
+
+  prev(event: Event) {
+    event.stopPropagation();
+    const current = this.selectedIdx();
+    if (current !== null) {
+      this.selectedIdx.set((current - 1 + this.photos().length) % this.photos().length);
+    }
+  }
+
+  // Bonus : Gérer les touches du clavier (Flèches et Echap) sur ton Mac
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (this.selectedIdx() === null) return;
+    if (event.key === 'ArrowRight') this.next(event);
+    if (event.key === 'ArrowLeft') this.prev(event);
+    if (event.key === 'Escape') this.closeLightbox();
+  }
 }
