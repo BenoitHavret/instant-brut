@@ -1,0 +1,31 @@
+<section class="contact-container">
+  <h2>Contact & Tirages d'Art</h2>
+  <p class="intro">Une de mes lumières de Camargue vous intéresse ? Parlons-en.</p>
+
+  <form name="contact-portfolio" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="contact-portfolio" />
+
+    <div class="form-group">
+      <label>Nom complet</label>
+      <input type="text" name="name" required placeholder="Ex: Jean Dupont">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" name="email" required placeholder="votre@email.com">
+    </div>
+
+    <div class="form-group">
+      <label>Sujet / Photo concernée</label>
+      <input type="text" name="subject" [value]="photoInteret()" 
+             placeholder="Ex: Tirage photo Taureau Noir">
+    </div>
+
+    <div class="form-group">
+      <label>Votre message</label>
+      <textarea name="message" rows="5" required placeholder="Dimensions souhaitées, support (papier d'art, alu-dibond)..."></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Envoyer la demande</button>
+  </form>
+</section>

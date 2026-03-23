@@ -97,4 +97,51 @@ img {
     font-size: 3.5rem;
     cursor: pointer;
   }
+
+  .lightbox-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 0;
+  border-top: 1px solid #222;
+
+  .text-info {
+    text-align: left;
+    .caption { margin: 0; color: var(--accent-gold); font-size: 1.1rem; }
+    .category { margin: 5px 0 0; color: #666; font-size: 0.8rem; text-transform: uppercase; }
+  }
+
+  .buy-btn {
+    background-color: var(--accent-gold);
+    color: black;
+    border: none;
+    padding: 12px 25px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+
+    &:hover {
+      background-color: white;
+      transform: translateY(-2px);
+    }
+
+    .icon { margin-right: 10px; }
+  }
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .lightbox-footer {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    .text-info { text-align: center; }
+  }
+}
 }

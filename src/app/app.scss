@@ -1,0 +1,7 @@
+.links a {
+  &.active {
+    color: var(--accent-gold);
+    border-bottom: 1px solid var(--accent-gold);
+    padding-bottom: 5px;
+  }
+}

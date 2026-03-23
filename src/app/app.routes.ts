@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
 import { Gallery } from './components/gallery/gallery';
+import { Contact } from './components/contact/contact';
 
 export const routes: Routes = [
   { 
     path: '', 
     component: Gallery // Affiche la galerie dès l'arrivée sur le site
   },
+  { path: 'contact', component: Contact },
 //   { 
 //     path: 'boutique', 
 //     loadComponent: () => import('./pages/shop/shop.component').then(m => m.ShopComponent) 

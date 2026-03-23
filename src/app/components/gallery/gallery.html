@@ -17,9 +17,19 @@
         <button class="nav-btn prev" (click)="prev($event)">&#10094;</button>
         
         <div class="lightbox-content" (click)="$event.stopPropagation()">
-          <img [src]="photos()[selectedIdx()!].url" [alt]="photos()[selectedIdx()!].title">
-          <p class="caption">{{ photos()[selectedIdx()!].title }}</p>
-        </div>
+  <img [src]="photos()[selectedIdx()!].url" [alt]="photos()[selectedIdx()!].title">
+  
+  <div class="lightbox-footer">
+    <div class="text-info">
+      <p class="caption">{{ photos()[selectedIdx()!].title }}</p>
+      <p class="category">{{ photos()[selectedIdx()!].category }}</p>
+    </div>
+
+    <button class="buy-btn" (click)="orderPrint(photos()[selectedIdx()!])">
+      <span class="icon">✉</span> Demander un tirage d'art
+    </button>
+  </div>
+</div>
 
         <button class="nav-btn next" (click)="next($event)">&#10095;</button>
       </div>

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gallery',
@@ -18,6 +19,9 @@ export class Gallery {
   ]);
 
   selectedIdx = signal<number | null>(null);
+
+  // ... dans ton constructor ou inject :
+constructor(private router: Router) {}
 
   openLightbox(index: number) {
     this.selectedIdx.set(index);
@@ -51,4 +55,14 @@ export class Gallery {
     if (event.key === 'ArrowLeft') this.prev(event);
     if (event.key === 'Escape') this.closeLightbox();
   }
+
+  orderPrint(photo: any) {
+  // On ferme la lightbox
+  this.closeLightbox();
+  
+  // On redirige vers contact avec un paramètre (QueryParam)
+  this.router.navigate(['/contact'], { 
+    queryParams: { photo: photo.title } 
+  });
+}
 }
