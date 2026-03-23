@@ -16,6 +16,7 @@
 
 .photo-card {
   position: relative;
+  width: 100%;
   overflow: hidden;
   // On force un ratio élégant (3:2) pour que toutes les miniatures soient alignées
   aspect-ratio: 3 / 2;
@@ -23,12 +24,42 @@
   background: #0a0a0a;
 
   img {
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Empêche l'image de déformer la carte
+    display: block;
+    transition: transform 0.5s ease;
+    
+  }
+
+  .info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+    z-index: 5; // On force le titre devant l'image
+    
+    // Pour être SÛR de voir le titre sur Netlify :
+    display: block !important; 
+    opacity: 1 !important; 
+    transform: none !important; 
+
+    .photo-title {
+      color: #c5a059; // Ton doré
+      margin: 0;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
   }
 
   &:hover img {
     transform: scale(1.08); // Léger zoom au survol sur Mac
   }
+
+
 }
 
 img {
