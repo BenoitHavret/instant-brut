@@ -1,21 +1,27 @@
-import { Injectable, signal } from '@angular/core';
-import { Photo } from '../models/photo.model';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GalleryService {
-  private allPhotos = signal<Photo[]>([
-    { id: 1, url: 'assets/img/cheval-blanc.jpg', title: 'Étalon en Camargue', category: 'Chevaux' },
-    { id: 2, url: 'assets/img/flamant-rose.jpg', title: 'Aube sur l\'étang', category: 'Oiseaux' },
-    { id: 3, url: 'assets/img/taureau-noir.jpg', title: 'Puissance brute', category: 'Taureaux' },
-    { id: 4, url: 'assets/img/abrivado.jpg', title: 'Course de rue', category: 'Tradition' }
-  ])
+  private http = inject(HttpClient);
 
-  public getPhotosByCategory(category: string) {
-    if(category === '')
-      return this.allPhotos()
-    return this.allPhotos().filter(p => p.category === category);
+  private allPhotos = signal<any[]>([])
+
+  constructor() {
+    this.http.get<any[]>('data/photos.json').subscribe({
+      next: (data) => this.allPhotos.set(data),
+      error: (err) => console.error("Erreur lors du chargement", err)
+    })
+  }
+
+ getPhotosByCategory(category: string) {
+    // 3. ICI : on lit le signal avec () pour créer la dépendance
+    const photos = this.allPhotos(); 
+    
+    if (!category || category === 'tous') return photos;
+    return photos.filter(p => p.category.toLowerCase() === category.toLowerCase());
   }
 
   public getCategories() {

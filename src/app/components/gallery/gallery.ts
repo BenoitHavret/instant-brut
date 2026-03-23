@@ -1,7 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { Component, computed, HostListener, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Photo } from '../../models/photo.model';
 import { GalleryService } from '../../services/gallery';
 
 @Component({
@@ -15,7 +14,10 @@ export class Gallery {
   private route = inject(ActivatedRoute);
   private galleryService = inject(GalleryService);
   // On utilise un Signal pour une détection de changement ultra-rapide
-  photos = signal<Photo[]>([]);
+  photos = computed(() => {
+    const theme = this.route.snapshot.params['theme'] || 'tous';
+    return this.galleryService.getPhotosByCategory(theme);
+  });
   currentTheme = signal<string>('');
 
   selectedIdx = signal<number | null>(null);
@@ -23,17 +25,17 @@ export class Gallery {
   // ... dans ton constructor ou inject :
 constructor(private router: Router) {
   // Chaque fois que l'URL change (ex: /galerie/faune -> /galerie/paysages)
-    this.route.params.subscribe(params => {
-      const theme = params['theme'];
-      this.currentTheme.set(theme);
+    // this.route.params.subscribe(params => {
+    //   const theme = params['theme'];
+    //   this.currentTheme.set(theme);
       
-      if (theme === 'tous') {
-        // Logique pour tout afficher si tu veux une vue globale
-        this.photos.set(this.galleryService.getPhotosByCategory('')); // À adapter
-      } else {
-        this.photos.set(this.galleryService.getPhotosByCategory(theme));
-      }
-    });
+    //   if (theme === 'tous') {
+    //     // Logique pour tout afficher si tu veux une vue globale
+    //     this.photos.set(this.galleryService.getPhotosByCategory('')); // À adapter
+    //   } else {
+    //     this.photos.set(this.galleryService.getPhotosByCategory(theme));
+    //   }
+    // });
   }
 
 
