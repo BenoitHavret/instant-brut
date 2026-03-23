@@ -1,0 +1,190 @@
+.gallery-grid {
+  display: grid;
+  // Magie du CSS : crée autant de colonnes de 350px que possible
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr; // Une seule photo par ligne sur petit mobile
+    padding: 10px;
+    gap: 10px;
+  }
+}
+
+.photo-card {
+  position: relative;
+  overflow: hidden;
+  // On force un ratio élégant (3:2) pour que toutes les miniatures soient alignées
+  aspect-ratio: 3 / 2;
+  cursor: pointer;
+  background: #0a0a0a;
+
+  img {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  &:hover img {
+    transform: scale(1.08); // Léger zoom au survol sur Mac
+  }
+}
+
+img {
+  -webkit-user-select: none;  /* Safari */
+  -ms-user-select: none;      /* IE 10 et + */
+  user-select: none;          /* Standard */
+  pointer-events: none;       /* Empêche toute interaction directe */
+  -webkit-user-drag: none;    /* Empêche le drag sur Mac/Safari */
+}
+.photo-container {
+  position: relative;
+  
+  .protection-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10; // Passe au-dessus de l'image
+    background: rgba(0,0,0,0); // Invisible
+  }
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95); // Fond presque noir
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  cursor: zoom-out;
+
+  
+
+  .lightbox-content {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: 90vh;
+  max-width: 1200px;
+  position: relative; // Important pour les boutons nav-btn s'ils sont dedans
+
+  .image-wrapper {
+    flex: 1; // Prend tout l'espace disponible au-dessus du footer
+    position: relative; // OBLIGATOIRE pour le "fill" de l'image
+    width: 100%;
+  }
+
+  .lightbox-footer {
+    height: 80px; // Taille fixe pour tes boutons
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    z-index: 10; // Pour être sûr de passer devant l'image
+  }
+}
+
+  .nav-btn {
+    position: absolute;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    padding: 20px;
+    transition: 0.3s;
+    &:hover { color: var(--accent-gold); }
+    &.prev { left: 20px; }
+    &.next { right: 20px; }
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3.5rem;
+    cursor: pointer;
+  }
+
+  .lightbox-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 0;
+  border-top: 1px solid #222;
+
+  .text-info {
+    text-align: left;
+    .caption { margin: 0; color: var(--accent-gold); font-size: 1.1rem; }
+    .category { margin: 5px 0 0; color: #666; font-size: 0.8rem; text-transform: uppercase; }
+  }
+
+  .actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  .share-btn {
+    background: transparent;
+    border: 1px solid #444;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    font-size: 1.2rem;
+
+    &:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+  }
+  .buy-btn {
+    background-color: var(--accent-gold);
+    color: black;
+    border: none;
+    padding: 12px 25px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+
+    &:hover {
+      background-color: white;
+      transform: translateY(-2px);
+    }
+
+    .icon { margin-right: 10px; }
+  }
+}  
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .lightbox-footer {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    .text-info { text-align: center; }
+  }
+}
+}

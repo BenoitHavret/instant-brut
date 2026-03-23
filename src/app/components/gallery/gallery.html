@@ -1,0 +1,57 @@
+<section class="gallery-grid">
+  @for (photo of photos(); track photo.id; let i = $index) {
+    <div class="photo-card" (click)="openLightbox(i)">
+      <img
+        [ngSrc]="photo.url"
+        [alt]="photo.title"
+        [priority]="i < 2"
+        width="600"
+        height="400"
+        class="img-fluid"
+      />
+      <div class="protection-layer"></div>
+      <div class="info">
+        <h3>{{ photo.title }}</h3>
+      </div>
+    </div>
+  }
+</section>
+
+@if (selectedIdx() !== null) {
+  <div class="lightbox" (click)="closeLightbox()">
+    <button class="close-btn">&times;</button>
+
+    <button class="nav-btn prev" (click)="prev($event)">&#10094;</button>
+
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      
+      <div class="image-wrapper">
+        <img 
+          [ngSrc]="photos()[selectedIdx()!].url" 
+          [alt]="photos()[selectedIdx()!].title"
+          fill
+          priority
+          style="object-fit: contain;">
+      </div>
+
+      <div class="lightbox-footer">
+        <div class="text-info">
+          <p class="caption">{{ photos()[selectedIdx()!].title }}</p>
+          <p class="category">{{ photos()[selectedIdx()!].category }}</p>
+        </div>
+
+        <div class="actions">
+          <button class="share-btn" (click)="sharePhoto(photos()[selectedIdx()!], $event)" title="Partager">
+            <span class="icon">➦</span>
+          </button>
+
+          <button class="buy-btn" (click)="orderPrint(photos()[selectedIdx()!])">
+            <span class="icon">✉</span> Demander un tirage d'art
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button class="nav-btn next" (click)="next($event)">&#10095;</button>
+  </div>
+}
