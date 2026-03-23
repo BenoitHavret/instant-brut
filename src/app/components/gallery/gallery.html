@@ -1,0 +1,21 @@
+<section class="gallery-grid">
+      @for (photo of photos(); track photo.id) {
+        <div class="photo-card">
+            <div class="photo-container">
+            <img 
+  [src]="photo.url" 
+  [alt]="photo.title" 
+  (contextmenu)="false" 
+  (dragstart)="false"
+  loading="lazy">
+  <div class="protection-layer"></div>
+          <div class="info">
+            <h3>{{ photo.title }}</h3>
+            <p>{{ photo.category }}</p>
+          </div>
+        </div>
+        </div>
+      } @empty {
+        <p>Chargement des lumières de Camargue...</p>
+      }
+    </section>
