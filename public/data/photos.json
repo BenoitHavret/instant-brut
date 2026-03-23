@@ -1,6 +1,6 @@
 [
-    { "id": 1, "url": "/assets/img/cheval-blanc.jpg", "title": "Étalon en Camargue", "category": "Chevaux" },
-    { "id": 2, "url": "/assets/img/flamant-rose.jpg", "title": "Aube sur l'étang", "category": "Oiseaux" },
-    { "id": 3, "url": "/assets/img/taureau-noir.jpg", "title": "Puissance brute", "category": "Taureaux" },
-    { "id": 4, "url": "/assets/img/abrivado.jpg", "title": "Course de rue", "category": "Tradition" }
+    { "id": 1, "url": "https://cdn.myportfolio.com/524ba4ff-9547-4f71-b0b2-0ff636d59e36/0ca1f851-a211-45e4-8c07-391f78361193_rw_1920.jpg?h=72965d215d7351690adcb3bb37b1a77a", "title": "Étalon en Camargue", "category": "Chevaux" },
+    { "id": 2, "url": "https://cdn.myportfolio.com/524ba4ff-9547-4f71-b0b2-0ff636d59e36/795e7d8c-ec47-4f18-9204-fe65dc53c3d9_rw_1200.jpg?h=2807fcc385c5422f3af31d0b58827bc8&url=aHR0cHM6Ly9waG90b3MuYWRvYmUuaW8vdjIvY2F0YWxvZ3MvNjFhYTc3YTg0MTUwNDdmZWJjY2VmNjNkMWM3YjkyNTcvYXNzZXRzLzVjZjFiYjVkNTdmNzdmOGIxZDkxZGVkY2NkODYxNGViL3JldmlzaW9ucy83ZmVmMjlhMTkwOGQ4MWJiZjI1YmZmZWEwMjU3MGJhYy9yZW5kaXRpb25zLzkyMDEzNWYxZmY3NzE1N2QxZjNlMWNjZWI5YjQwZGVm", "title": "Vol rose", "category": "Oiseaux" },
+    { "id": 3, "url": "https://cdn.myportfolio.com/524ba4ff-9547-4f71-b0b2-0ff636d59e36/089ae16e-0fbb-428d-a359-50377b6ebca6_rw_1920.jpg?h=f24a2e52b2ab6f12ffb12563bfeb56f0", "title": "Puissance brute", "category": "Taureaux" },
+    { "id": 4, "url": "https://cdn.myportfolio.com/524ba4ff-9547-4f71-b0b2-0ff636d59e36/b3ebdc65-8b7a-44fa-92be-0095a02ae06f_rw_1920.jpg?h=0463ca3875c8d154844ee95059393fa9", "title": "Abrivado", "category": "Traditions" }
 ]

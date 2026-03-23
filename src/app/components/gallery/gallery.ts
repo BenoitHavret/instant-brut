@@ -1,5 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, computed, HostListener, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GalleryService } from '../../services/gallery';
 
@@ -13,8 +14,11 @@ import { GalleryService } from '../../services/gallery';
 export class Gallery {
   private route = inject(ActivatedRoute);
   private galleryService = inject(GalleryService);
+  private routeParams = toSignal(this.route.params);
+
   // On utilise un Signal pour une détection de changement ultra-rapide
   photos = computed(() => {
+    const params = this.routeParams();
     const theme = this.route.snapshot.params['theme'] || 'tous';
     return this.galleryService.getPhotosByCategory(theme);
   });
@@ -23,20 +27,7 @@ export class Gallery {
   selectedIdx = signal<number | null>(null);
 
   // ... dans ton constructor ou inject :
-constructor(private router: Router) {
-  // Chaque fois que l'URL change (ex: /galerie/faune -> /galerie/paysages)
-    // this.route.params.subscribe(params => {
-    //   const theme = params['theme'];
-    //   this.currentTheme.set(theme);
-      
-    //   if (theme === 'tous') {
-    //     // Logique pour tout afficher si tu veux une vue globale
-    //     this.photos.set(this.galleryService.getPhotosByCategory('')); // À adapter
-    //   } else {
-    //     this.photos.set(this.galleryService.getPhotosByCategory(theme));
-    //   }
-    // });
-  }
+constructor(private router: Router) {}
 
 
   openLightbox(index: number) {
